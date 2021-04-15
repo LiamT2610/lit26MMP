@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="library/css/editor-styles.css">
+    <title>Sql Checker</title>
+</head>
+
+<body>
+    <!--
+    <p>Input SQL</p>
+    <input type="text" id="SQLDump" size ="60"></input>
+
+    
+    <p id ="output"></p>
+    -->
+
+    <div class="editor">
+        <div class="editor__wrapper">
+            <div class="editor__body">
+                <div id="SQLDump" class="editor__code"></div>
+            </div>
+            <div class="editor__footer">
+                <div class="editor__footer--left">
+                    <input class ="editor__btn" type = button onclick="ReadSQL()" value = "Test Code"></input>
+                </div>
+                <div class="editor__footer--right">
+                    <div class ="editor__output">
+                        <p id ="output" class ="editor__output"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--required Ace Libraries-->
+    <script src ="library/js/ace-editor/src-min/ace.js"></script>
+    <script src = "library/js/ace-editor/src-min/mode-mysql.js"></script>
+    
+    <!--Required Custom Scripts-->
+    <script src="library/js/editor.js"></script>
+</body>
+</html>
