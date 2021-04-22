@@ -47,51 +47,23 @@ function createChecker(x){
     }
 }
 
+function populateDB(string,){
 
-//* class structure */
-
-class Table{
-    constructor(){
-        
-    }
-
-}
-
-class Attribute{
-
-    constructor(string, name, attribute, primarykey, table){
-
-         if(string.match(/primary key/ != null)){primarykey = true;}
-         else{primarykey = false;}
-         
-         var Splitstring = string.split(" ");
-         if(splitstring[0] == "foreign"){
-            //add later
-         }else if(splitstring[0] == "on"){
-             //add later
-        } else{
-           name = splitstring[0];
-        attribute = splitstring[1];
-        }
-         this.table = table;
-    }
-}
-
-function populateDB(string){
-    
     var attributeSplit = string.split("\n");
+
     let attributes = [{}]
 
+    var table 
     var i 
     for (i = 0; i < attributeSplit.length; i++) { 
-        listAttri(attributeSplit[i], attributes)
+        listAttri(attributeSplit[i], attributes, table)
     }
     console.table(attributes);
 }
-function listAttri(attribute, attributes){
+
+function listAttri(attribute, attributes, table){
     var primarykey
-    var name
-    var type
+    var table
 
     if(attribute.match(/primary key/) != null){primarykey = true;}
     else{primarykey = false;}
@@ -106,13 +78,14 @@ function listAttri(attribute, attributes){
           // code block
           break;
         case "create":
-          
+            table = splitstring[2]
             break;
         case ")":
            
             break;
         default:
             let tempattri = {
+                "table": table,
                 "Pk": primarykey,
                 "attriName": splitstring[0],
                 "attriType" : splitstring[1]
@@ -147,9 +120,12 @@ executeCodeBtn.addEventListener('click', () => {
      }
 
      var DB = UserCode.split(";");
+     
 
      var i
-     for (i = 0; i < DB.length; i++) { populateDB(DB[i]);}
+     for (i = 0; i < DB.length; i++) { 
+         populateDB(DB[i], Tables);
+    }
     
 
 });
