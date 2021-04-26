@@ -1,6 +1,8 @@
 
 const executeCodeBtn = document.querySelector('.editor__btn')
 
+var table =""
+
 //setup ace
 let codeEditor = ace.edit("SQLDump");
 
@@ -47,13 +49,14 @@ function createChecker(x){
     }
 }
 
-function populateDB(string,){
+function populateDB(string){
 
     var attributeSplit = string.split("\n");
 
     let attributes = [{}]
 
-    var table 
+
+
     var i 
     for (i = 0; i < attributeSplit.length; i++) { 
         listAttri(attributeSplit[i], attributes, table)
@@ -61,14 +64,14 @@ function populateDB(string,){
     console.table(attributes);
 }
 
-function listAttri(attribute, attributes, table){
+function listAttri(attribute, attributes){
     var primarykey
-    var table
-
+    
     if(attribute.match(/primary key/) != null){primarykey = true;}
     else{primarykey = false;}
 
     var splitstring = attribute.split(" ");
+    console.log(splitstring[0]);
  
     switch(splitstring[0]) {
         case "foreign":
@@ -92,11 +95,7 @@ function listAttri(attribute, attributes, table){
         
             };
             attributes.push(tempattri);
-      }
-
-
-
-    
+      }    
 }
 
 executeCodeBtn.addEventListener('click', () => {
@@ -124,7 +123,7 @@ executeCodeBtn.addEventListener('click', () => {
 
      var i
      for (i = 0; i < DB.length; i++) { 
-         populateDB(DB[i], Tables);
+         populateDB(DB[i]);
     }
     
 
